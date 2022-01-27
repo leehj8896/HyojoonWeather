@@ -20,13 +20,31 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JSQ-OQ-kLT">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="type1" id="JSQ-OQ-kLT" customClass="Type1" customModule="HyojoonWeather" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JSQ-OQ-kLT" id="gLD-Wm-ssf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsQ-Et-TuQ">
+                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="dsQ-Et-TuQ" secondAttribute="trailing" id="9ki-Cb-96l"/>
+                                                <constraint firstItem="dsQ-Et-TuQ" firstAttribute="top" secondItem="gLD-Wm-ssf" secondAttribute="topMargin" id="R7H-qU-obI"/>
+                                                <constraint firstItem="dsQ-Et-TuQ" firstAttribute="leading" secondItem="gLD-Wm-ssf" secondAttribute="leadingMargin" id="W07-7V-Xp7"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dsQ-Et-TuQ" secondAttribute="bottom" id="gqv-08-BMk"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblText" destination="dsQ-Et-TuQ" id="kek-ef-HgA"/>
+                                            <segue destination="q0v-EL-tcg" kind="show" identifier="sgDetail" id="Cbu-Ot-hGv"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -44,10 +62,56 @@
                             <constraint firstItem="BOj-Rs-eon" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="whs-aM-CUK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tvListView" destination="BOj-Rs-eon" id="rRa-Vt-FNT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="20" y="84"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="Zxp-y4-lwX">
+            <objects>
+                <viewController id="q0v-EL-tcg" customClass="DetailViewController" customModule="HyojoonWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SzJ-EK-GKG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAu-yf-R9F">
+                                <rect key="frame" x="181" y="595" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="미래날씨"/>
+                                <connections>
+                                    <action selector="btnFuture:" destination="q0v-EL-tcg" eventType="touchUpInside" id="8Cp-p0-A9A"/>
+                                    <segue destination="dzg-A5-PXv" kind="show" identifier="sgFuture" id="Xjj-7d-sLa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Hjn-BE-95c"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jue-Xe-Leu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bth-M7-B44" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="859" y="84"/>
+        </scene>
+        <!--Future View Controller-->
+        <scene sceneID="XY7-Oe-1cE">
+            <objects>
+                <viewController id="dzg-A5-PXv" customClass="FutureViewController" customModule="HyojoonWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Cc-KW-aRS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="76l-hW-ml6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="eE5-ZI-2Bt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZgQ-30-uaH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="84"/>
         </scene>
     </scenes>
     <resources>
