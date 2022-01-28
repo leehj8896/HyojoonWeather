@@ -15,7 +15,7 @@
 		1ECE85C927A270C10092569C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ECE85C727A270C10092569C /* LaunchScreen.storyboard */; };
 		1ECE85D327A2ED440092569C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECE85D227A2ED440092569C /* DetailViewController.swift */; };
 		1ECE85D527A2EE880092569C /* FutureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECE85D427A2EE880092569C /* FutureViewController.swift */; };
-		1ECE85D727A2FA660092569C /* Type1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECE85D627A2FA660092569C /* Type1.swift */; };
+		1ECE85D727A2FA660092569C /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECE85D627A2FA660092569C /* CityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		1ECE85CA27A270C10092569C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ECE85D227A2ED440092569C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1ECE85D427A2EE880092569C /* FutureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureViewController.swift; sourceTree = "<group>"; };
-		1ECE85D627A2FA660092569C /* Type1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type1.swift; sourceTree = "<group>"; };
+		1ECE85D627A2FA660092569C /* CityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 				1ECE85CA27A270C10092569C /* Info.plist */,
 				1ECE85D227A2ED440092569C /* DetailViewController.swift */,
 				1ECE85D427A2EE880092569C /* FutureViewController.swift */,
-				1ECE85D627A2FA660092569C /* Type1.swift */,
+				1ECE85D627A2FA660092569C /* CityCell.swift */,
 			);
 			path = HyojoonWeather;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 				1ECE85BF27A270C00092569C /* SceneDelegate.swift in Sources */,
 				1ECE85D527A2EE880092569C /* FutureViewController.swift in Sources */,
 				1ECE85D327A2ED440092569C /* DetailViewController.swift in Sources */,
-				1ECE85D727A2FA660092569C /* Type1.swift in Sources */,
+				1ECE85D727A2FA660092569C /* CityCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
