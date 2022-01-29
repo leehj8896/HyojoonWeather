@@ -37,35 +37,72 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         ["춘천", "1845136"],
     ]
     
-    func getData(_ cityId: String){
-        let url: URL = URL(string: "\(baseUrl)?id=\(cityId)&appid=\(apiKey)")!
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let jsonData = data {
-                do {
-                    let serialized = try JSONSerialization.jsonObject(with: jsonData, options: [])
-                    print(serialized)
-                } catch {}
+    var tempData: Array<Any?> = Array(repeating: nil, count: 20)
+    var humData: Array<Any?> = Array(repeating: nil, count: 20)
+    var count = 0
+    
+    func getData() {
+        
+        for i in 0...19 {
+            let cityId = cities[i][1]
+//            print("cityId: \(cityId)")
+            let url: URL = URL(string: "\(baseUrl)?id=\(cityId)&appid=\(apiKey)")!
+
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let jsonData = data {
+                    do {
+                        let serialized = try JSONSerialization.jsonObject(with: jsonData, options: []) as! Dictionary<String, Any>
+                        let main = serialized["main"] as! Dictionary<String, Any>
+                        let temperature = main["temp"]!
+                        let humidity = main["humidity"]!
+                        
+                        self.tempData[i] = temperature
+                        self.humData[i] = humidity
+                        
+                        self.count += 1
+                        if self.count % 5 == 0 {
+                            DispatchQueue.main.async {
+                                self.tvListView.reloadData()
+                            }
+                        }
+                    } catch {}
+                }
             }
+            task.resume()
+
         }
-        task.resume()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        getData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 20
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tvListView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
         let name = cities[indexPath.row][0]
-        let cityId = cities[indexPath.row][1]
-        getData(cityId)
         cell.lblName.text = name
+        
+        if let temperature = self.tempData[indexPath.row] {
+            cell.lblTemperature.text = "\(temperature)"
+        }
+        
+        if let humidity = self.humData[indexPath.row]{
+            cell.lblHumidity.text = "\(humidity)"
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }
 
