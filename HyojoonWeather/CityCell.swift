@@ -12,5 +12,6 @@ class CityCell: UITableViewCell{
     @IBOutlet var lblName: UILabel!
     @IBOutlet var lblTemperature: UILabel!
     @IBOutlet var lblHumidity: UILabel!
+    @IBOutlet var imgIcon: UIImageView!
     
 }

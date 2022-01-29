@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let apiKey: String = "7c6559b7c41b7c70eda1c6f85e1f8fbb"
     let baseUrl: String = "https://api.openweathermap.org/data/2.5/weather"
+    let imgBaseUrl: String = "https://openweathermap.org/img/wn/"
     
     let cities: [[String]] = [
         ["공주", "1842616"],
@@ -39,13 +40,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var tempData: Array<Any?> = Array(repeating: nil, count: 20)
     var humData: Array<Any?> = Array(repeating: nil, count: 20)
+    var iconData: Array<Any?> = Array(repeating: nil, count: 20)
     var count = 0
     
     func getData() {
         
         for i in 0...19 {
             let cityId = cities[i][1]
-//            print("cityId: \(cityId)")
             let url: URL = URL(string: "\(baseUrl)?id=\(cityId)&appid=\(apiKey)")!
 
             
@@ -53,15 +54,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let jsonData = data {
                     do {
                         let serialized = try JSONSerialization.jsonObject(with: jsonData, options: []) as! Dictionary<String, Any>
+                        
                         let main = serialized["main"] as! Dictionary<String, Any>
                         let temperature = main["temp"]!
                         let humidity = main["humidity"]!
                         
+                        let weather = serialized["weather"] as! Array<Dictionary<String, Any>>
+                        let icon = weather[0]["icon"]!
+                        
                         self.tempData[i] = temperature
                         self.humData[i] = humidity
+                        self.iconData[i] = icon
                         
+                        print("Request: \(i)")
                         self.count += 1
-                        if self.count % 5 == 0 {
+                        if self.count >= 0 {
                             DispatchQueue.main.async {
                                 self.tvListView.reloadData()
                             }
@@ -96,6 +103,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let humidity = self.humData[indexPath.row]{
             cell.lblHumidity.text = "\(humidity)"
+        }
+        
+        if let icon = self.iconData[indexPath.row] {
+            let url = URL(string: "\(imgBaseUrl)\(icon).png")
+            do {
+                let data = try Data(contentsOf: url!)
+                cell.imgIcon.image = UIImage(data: data)
+            } catch  {}
         }
         
         return cell

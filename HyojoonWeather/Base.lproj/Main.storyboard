@@ -76,6 +76,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="imgIcon" destination="KiB-rc-Jeg" id="RuG-dT-kQa"/>
                                             <outlet property="lblHumidity" destination="hv7-ij-weB" id="L1i-uj-hjv"/>
                                             <outlet property="lblName" destination="Kf5-ih-lTp" id="HXs-7k-6Ph"/>
                                             <outlet property="lblTemperature" destination="j8z-LZ-g63" id="v9b-34-rcp"/>
