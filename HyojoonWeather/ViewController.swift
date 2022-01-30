@@ -47,7 +47,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         for i in 0...19 {
             let cityId = cities[i][1]
-            let url: URL = URL(string: "\(baseUrl)?id=\(cityId)&appid=\(apiKey)")!
+            let url: URL = URL(string: "\(baseUrl)?id=\(cityId)&appid=\(apiKey)&units=metric&lang=kr")!
 
             
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
