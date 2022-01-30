@@ -279,14 +279,14 @@
                     <connections>
                         <outlet property="imgIcon" destination="76u-2Q-oFK" id="Wgq-MS-u46"/>
                         <outlet property="lblDescription" destination="57H-lN-Oi6" id="XPS-a4-m5N"/>
-                        <outlet property="lblFeelLike" destination="XXj-eK-Usa" id="m9Z-8z-UA4"/>
+                        <outlet property="lblFeelsLike" destination="XXj-eK-Usa" id="m9Z-8z-UA4"/>
                         <outlet property="lblHumidity" destination="uA1-g7-Fd6" id="zyG-wc-CCe"/>
                         <outlet property="lblName" destination="fUQ-07-9jk" id="w5w-u3-ykw"/>
                         <outlet property="lblPressure" destination="PyZ-IG-Oog" id="9k6-5n-c82"/>
                         <outlet property="lblTemp" destination="hYW-ze-vy6" id="Ry9-7J-zol"/>
                         <outlet property="lblTempMax" destination="3ba-P0-sze" id="G0b-Jo-zhy"/>
                         <outlet property="lblTempMin" destination="VIz-Xs-jy4" id="aeF-e6-sBs"/>
-                        <outlet property="lblWind" destination="HLj-mA-Hvu" id="4i2-jF-0nI"/>
+                        <outlet property="lblWindSpeed" destination="HLj-mA-Hvu" id="4i2-jF-0nI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bth-M7-B44" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

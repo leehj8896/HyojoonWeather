@@ -47,7 +47,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let cityId = cities[i][1]
             let url: URL = URL(string: "\(baseUrl)?id=\(cityId)&appid=\(apiKey)&units=metric&lang=kr")!
 
-            
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let jsonData = data {
                     do {
@@ -96,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let detailViewController = segue.destination as? DetailViewController {
                 
                 if let indexPath = tvListView.indexPathForSelectedRow {
-//                    detailViewController.name =
+                    detailViewController.currentWeather = weatherData[indexPath.row]
                 }
                 
             }

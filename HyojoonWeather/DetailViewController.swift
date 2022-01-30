@@ -12,35 +12,39 @@ class DetailViewController: UIViewController {
     
     @IBOutlet var lblName: UILabel!
     @IBOutlet var lblTemp: UILabel!
-    @IBOutlet var lblFeelLike: UILabel!
+    @IBOutlet var lblFeelsLike: UILabel!
     @IBOutlet var lblHumidity: UILabel!
     @IBOutlet var lblTempMin: UILabel!
     @IBOutlet var lblTempMax: UILabel!
     @IBOutlet var lblPressure: UILabel!
-    @IBOutlet var lblWind: UILabel!
+    @IBOutlet var lblWindSpeed: UILabel!
     @IBOutlet var lblDescription: UILabel!
     @IBOutlet var imgIcon: UIImageView!
     
-//    var name: String?
-//    var temp: String?
-//    var feelLike: String?
-//    var humidity: String?
-//    var tempMin: String?
-//    var tempMax: String?
-//    var pressure: String?
-//    var wind: String?
-//    var description: String?
-//    var iconUrl: String?
     var currentWeather: CurrentWeather?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        if let data = test{
-//            DispatchQueue.main.async {
-//                self.lblName.text = data
-//            }
-//        }
+        if let currentWeather = self.currentWeather {
+            DispatchQueue.main.async {
+                self.lblName.text = currentWeather.cityName
+                self.lblTemp.text = currentWeather.temperature
+                self.lblFeelsLike.text = currentWeather.feelsLike
+                self.lblHumidity.text = currentWeather.humidity
+                self.lblTempMin.text = currentWeather.tempMin
+                self.lblTempMax.text = currentWeather.tempMax
+                self.lblPressure.text = currentWeather.pressure
+                self.lblWindSpeed.text = currentWeather.windSpeed
+                self.lblDescription.text = currentWeather.description
+                
+                do {
+                    let url = URL(string: currentWeather.iconUrl!)
+                    let data = try Data(contentsOf: url!)
+                    self.imgIcon.image = UIImage(data: data)
+                } catch  {}
+            }
+        }
     }
     
 
