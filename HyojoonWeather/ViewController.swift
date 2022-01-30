@@ -38,9 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         ["춘천", "1845136"],
     ]
     
-    var tempData: Array<Any?> = Array(repeating: nil, count: 20)
-    var humData: Array<Any?> = Array(repeating: nil, count: 20)
-    var iconData: Array<Any?> = Array(repeating: nil, count: 20)
+    var weatherData: Array<CurrentWeather?> = Array(repeating: nil, count: 20)
     var count = 0
     
     func getData() {
@@ -53,22 +51,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if let jsonData = data {
                     do {
+                        
+                        let currentWeather = CurrentWeather()
+                        
+                        currentWeather.cityName = self.cities[i][0]
+                        currentWeather.cityId = self.cities[i][1]
+                        
                         let serialized = try JSONSerialization.jsonObject(with: jsonData, options: []) as! Dictionary<String, Any>
                         
                         let main = serialized["main"] as! Dictionary<String, Any>
-                        let temperature = main["temp"]!
-                        let humidity = main["humidity"]!
+                        currentWeather.temperature = "\(main["temp"]!)"
+                        currentWeather.humidity = "\(main["humidity"]!)"
+                        currentWeather.feelsLike = "\(main["feels_like"]!)"
+                        currentWeather.pressure = "\(main["pressure"]!)"
+                        currentWeather.tempMin = "\(main["temp_min"]!)"
+                        currentWeather.tempMax = "\(main["temp_max"]!)"
                         
                         let weather = serialized["weather"] as! Array<Dictionary<String, Any>>
-                        let icon = weather[0]["icon"]!
+                        currentWeather.description = "\(weather[0]["description"]!)"
+                        currentWeather.iconUrl = "\(self.imgBaseUrl)\(weather[0]["icon"]!).png"
                         
-                        self.tempData[i] = temperature
-                        self.humData[i] = humidity
-                        self.iconData[i] = icon
+                        let wind = serialized["wind"] as! Dictionary<String, Any>
+                        currentWeather.windSpeed = "\(wind["speed"]!)"
+
+                        self.weatherData[i] = currentWeather
                         
                         print("Request: \(i)")
                         self.count += 1
-                        if self.count >= 0 {
+                        if self.count == 20 {
                             DispatchQueue.main.async {
                                 self.tvListView.reloadData()
                             }
@@ -79,7 +89,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             task.resume()
 
         }
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueId = segue.identifier, segueId == "sgDetail" {
+            if let detailViewController = segue.destination as? DetailViewController {
+                
+                if let indexPath = tvListView.indexPathForSelectedRow {
+//                    detailViewController.name =
+                }
+                
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -94,20 +115,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tvListView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
-        let name = cities[indexPath.row][0]
-        cell.lblName.text = name
         
-        if let temperature = self.tempData[indexPath.row] {
-            cell.lblTemperature.text = "\(temperature)"
-        }
-        
-        if let humidity = self.humData[indexPath.row]{
-            cell.lblHumidity.text = "\(humidity)"
-        }
-        
-        if let icon = self.iconData[indexPath.row] {
-            let url = URL(string: "\(imgBaseUrl)\(icon).png")
+        if let currentWeather = self.weatherData[indexPath.row] {
+            cell.lblName.text = currentWeather.cityName!
+            cell.lblTemperature.text = currentWeather.temperature!
+            cell.lblHumidity.text = currentWeather.humidity!
             do {
+                let url = URL(string: currentWeather.iconUrl!)
                 let data = try Data(contentsOf: url!)
                 cell.imgIcon.image = UIImage(data: data)
             } catch  {}
