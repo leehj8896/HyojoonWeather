@@ -75,10 +75,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
                         self.weatherData[i] = currentWeather
                         
-                        print("Request: \(i)")
+//                        print("Request: \(i)")
                         self.count += 1
                         if self.count == 20 {
                             DispatchQueue.main.async {
+                                print("Request Complete")
                                 self.tvListView.reloadData()
                             }
                         }

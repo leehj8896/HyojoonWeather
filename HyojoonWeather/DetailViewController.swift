@@ -47,8 +47,14 @@ class DetailViewController: UIViewController {
         }
     }
     
-
-    @IBAction func btnFuture(_ sender: UIButton) {
-    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueId = segue.identifier, segueId == "sgFuture" {
+            if let futureViewController = segue.destination as? FutureViewController {
+                
+                futureViewController.cityId = currentWeather?.cityId
+                
+            }
+        }
+    }
 }

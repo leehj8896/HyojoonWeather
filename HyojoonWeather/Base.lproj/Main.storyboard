@@ -248,15 +248,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAu-yf-R9F">
-                                <rect key="frame" x="181" y="669" width="52" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="미래날씨"/>
-                                <connections>
-                                    <action selector="btnFuture:" destination="q0v-EL-tcg" eventType="touchUpInside" id="8Cp-p0-A9A"/>
-                                    <segue destination="dzg-A5-PXv" kind="show" identifier="sgFuture" id="Xjj-7d-sLa"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="wind" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLj-mA-Hvu">
                                 <rect key="frame" x="241" y="563" width="37" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -275,7 +266,13 @@
                         <viewLayoutGuide key="safeArea" id="Hjn-BE-95c"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jue-Xe-Leu"/>
+                    <navigationItem key="navigationItem" id="jue-Xe-Leu">
+                        <barButtonItem key="rightBarButtonItem" title="미래날씨" id="abb-Sx-wVZ">
+                            <connections>
+                                <segue destination="dzg-A5-PXv" kind="show" identifier="sgFuture" id="KeW-zv-hYv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imgIcon" destination="76u-2Q-oFK" id="Wgq-MS-u46"/>
                         <outlet property="lblDescription" destination="57H-lN-Oi6" id="XPS-a4-m5N"/>
@@ -300,14 +297,33 @@
                     <view key="view" contentMode="scaleToFill" id="1Cc-KW-aRS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udj-Yw-SFk">
+                                <rect key="frame" x="128" y="144" width="47" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tw6-oh-kfd">
+                                <rect key="frame" x="255" y="144" width="82" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="76l-hW-ml6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="eE5-ZI-2Bt"/>
+                    <connections>
+                        <outlet property="lblCount" destination="Tw6-oh-kfd" id="0Gy-dH-NMY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZgQ-30-uaH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1684" y="84"/>
+            <point key="canvasLocation" x="1682.608695652174" y="83.705357142857139"/>
         </scene>
     </scenes>
     <resources>
