@@ -74,6 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         currentWeather.windSpeed = "\(wind["speed"]!)"
 
                         self.weatherData[i] = currentWeather
+                        print("i:\(i) data: \(currentWeather.cityName!) \(currentWeather.tempMin!)")
                         
 //                        print("Request: \(i)")
                         self.count += 1

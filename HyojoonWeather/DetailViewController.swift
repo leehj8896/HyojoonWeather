@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
         if let segueId = segue.identifier, segueId == "sgFuture" {
             if let futureViewController = segue.destination as? FutureViewController {
                 
-                futureViewController.cityId = currentWeather?.cityId
+                futureViewController.currentWeather = currentWeather
                 
             }
         }
