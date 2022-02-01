@@ -49,7 +49,7 @@ class FutureViewController: UIViewController {
         // 시작지점 설정
         if let tempMin = self.futureData[0]?.tempMin {
             let x = Float(0) * gap
-            let y = Float(h) - (Float(tempMin)! + 30) * Float(h) / 100
+            let y = (1 - (Float(tempMin)! + 30) / 80) * Float(h)
             prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
             curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
         }
@@ -58,7 +58,7 @@ class FutureViewController: UIViewController {
         for i in 0 ... futureData.count-1 {
             if let tempMin = self.futureData[i]?.tempMin {
                 let x = Float(i) * gap
-                let y = Float(h) - (Float(tempMin)! + 30) * Float(h) / 100
+                let y = (1 - (Float(tempMin)! + 30) / 80) * Float(h)
                 curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
                 context.addLines(between: [prev!, curr!])
                 prev = curr
@@ -74,7 +74,7 @@ class FutureViewController: UIViewController {
         // 시작지점 설정
         if let tempMax = self.futureData[0]?.tempMax {
             let x = Float(0) * gap
-            let y = Float(h) - (Float(tempMax)! + 30) * Float(h) / 100
+            let y = (1 - (Float(tempMax)! + 30) / 80) * Float(h)
             prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
             curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
         }
@@ -83,7 +83,7 @@ class FutureViewController: UIViewController {
         for i in 0 ... futureData.count-1 {
             if let tempMax = self.futureData[i]?.tempMax {
                 let x = Float(i) * gap
-                let y = Float(h) - (Float(tempMax)! + 30) * Float(h) / 100
+                let y = (1 - (Float(tempMax)! + 30) / 80) * Float(h)
                 curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
                 context.addLines(between: [prev!, curr!])
                 prev = curr
@@ -133,6 +133,7 @@ class FutureViewController: UIViewController {
                         
                         let serialized = try JSONSerialization.jsonObject(with: jsonData, options: []) as! Dictionary<String, Any>
                         let list = serialized["list"] as! Array<Dictionary<String, Any>>
+//                        print(list[0])
                         
                         for element in list {
                             
@@ -142,7 +143,6 @@ class FutureViewController: UIViewController {
                             currentWeather.tempMax = "\(main["temp_max"]!)"
                             currentWeather.humidity = "\(main["humidity"]!)"
                             self.futureData.append(currentWeather)
-                            
                         }
                         
                         DispatchQueue.main.async {
