@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         let weather = serialized["weather"] as! Array<Dictionary<String, Any>>
                         currentWeather.description = "\(weather[0]["description"]!)"
-                        currentWeather.iconUrl = "\(self.imgBaseUrl)\(weather[0]["icon"]!).png"
+                        currentWeather.iconUrl = "\(self.imgBaseUrl)\(weather[0]["icon"]!)@2x.png"
                         
                         let wind = serialized["wind"] as! Dictionary<String, Any>
                         currentWeather.windSpeed = "\(wind["speed"]!)"
@@ -118,8 +118,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if let currentWeather = self.weatherData[indexPath.row] {
             cell.lblName.text = currentWeather.cityName!
-            cell.lblTemperature.text = currentWeather.temperature!
-            cell.lblHumidity.text = currentWeather.humidity!
+            cell.lblTemperature.text = "\(currentWeather.temperature!) ºC"
+            cell.lblHumidity.text = "\(currentWeather.humidity!) %"
             do {
                 let url = URL(string: currentWeather.iconUrl!)
                 let data = try Data(contentsOf: url!)
@@ -131,7 +131,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 80
     }
 }
 

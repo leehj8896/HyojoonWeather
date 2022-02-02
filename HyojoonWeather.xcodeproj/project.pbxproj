@@ -21,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		1E0B9FB627A6F6AC00699C5D /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		1E1EBF3B27AA35CE0077C221 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1ECE85B927A270C00092569C /* HyojoonWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HyojoonWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ECE85BC27A270C00092569C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ECE85BE27A270C00092569C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +57,7 @@
 		1ECE85B027A270C00092569C = {
 			isa = PBXGroup;
 			children = (
+				1E1EBF3B27AA35CE0077C221 /* README.md */,
 				1ECE85BB27A270C00092569C /* HyojoonWeather */,
 				1ECE85BA27A270C00092569C /* Products */,
 			);

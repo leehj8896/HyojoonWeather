@@ -20,103 +20,105 @@ class FutureViewController: UIViewController {
     func drawChart() {
         UIGraphicsBeginImageContext(imgChart.frame.size)
 //        print("size: \(imgChart.frame.size)")
-        let context = UIGraphicsGetCurrentContext()!
-        
-        context.setLineWidth(4.0)
-        context.setStrokeColor(UIColor.gray.cgColor)
-        
-        let h: CGFloat = imgChart.frame.size.height
-        let w: CGFloat = imgChart.frame.size.width
-        
-        // outside
-        context.addLines(between: [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: h)])
-        context.addLines(between: [CGPoint(x: 0, y: 0), CGPoint(x: w, y: 0)])
-        context.addLines(between: [CGPoint(x: w, y: h), CGPoint(x: w, y: 0)])
-        context.addLines(between: [CGPoint(x: w, y: h), CGPoint(x: 0, y: h)])
-        
-        context.strokePath()
-        
-        context.setLineWidth(3.0)
+        if let context = UIGraphicsGetCurrentContext() {
+            
+            context.setLineWidth(4.0)
+            context.setStrokeColor(UIColor.gray.cgColor)
+            
+            let h: CGFloat = imgChart.frame.size.height
+            let w: CGFloat = imgChart.frame.size.width
+            
+            // outside
+            context.addLines(between: [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: h)])
+            context.addLines(between: [CGPoint(x: 0, y: 0), CGPoint(x: w, y: 0)])
+            context.addLines(between: [CGPoint(x: w, y: h), CGPoint(x: w, y: 0)])
+            context.addLines(between: [CGPoint(x: w, y: h), CGPoint(x: 0, y: h)])
+            
+            context.strokePath()
+            
+            context.setLineWidth(3.0)
 
-        let gap = Float(w) / Float(futureData.count + 2)
-        
-        var prev: CGPoint?
-        var curr: CGPoint?
-        
-        // 최저기온
-        context.setStrokeColor(UIColor.red.cgColor)
+            let gap = Float(w) / Float(futureData.count + 2)
+            
+            var prev: CGPoint?
+            var curr: CGPoint?
+            
+            // 최저기온
+            context.setStrokeColor(UIColor.red.cgColor)
 
-        // 시작지점 설정
-        if let tempMin = self.futureData[0]?.tempMin {
-            let x = Float(0) * gap
-            let y = (1 - (Float(tempMin)! + 30) / 80) * Float(h)
-            prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
-            curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
-        }
-        
-        // 그리기
-        for i in 0 ... futureData.count-1 {
-            if let tempMin = self.futureData[i]?.tempMin {
-                let x = Float(i) * gap
+            // 시작지점 설정
+            if let tempMin = self.futureData[0]?.tempMin {
+                let x = Float(0) * gap
                 let y = (1 - (Float(tempMin)! + 30) / 80) * Float(h)
+                prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
                 curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                context.addLines(between: [prev!, curr!])
-                prev = curr
             }
-        }
-        context.strokePath()
-        
-        
-        // 최고기온
-        context.setLineWidth(2.0)
-        context.setStrokeColor(UIColor.blue.cgColor)
+            
+            // 그리기
+            for i in 0 ... futureData.count-1 {
+                if let tempMin = self.futureData[i]?.tempMin {
+                    let x = Float(i) * gap
+                    let y = (1 - (Float(tempMin)! + 30) / 80) * Float(h)
+                    curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
+                    context.addLines(between: [prev!, curr!])
+                    prev = curr
+                }
+            }
+            context.strokePath()
+            
+            
+            // 최고기온
+            context.setLineWidth(2.0)
+            context.setStrokeColor(UIColor.blue.cgColor)
 
-        // 시작지점 설정
-        if let tempMax = self.futureData[0]?.tempMax {
-            let x = Float(0) * gap
-            let y = (1 - (Float(tempMax)! + 30) / 80) * Float(h)
-            prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
-            curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
-        }
-        
-        // 그리기
-        for i in 0 ... futureData.count-1 {
-            if let tempMax = self.futureData[i]?.tempMax {
-                let x = Float(i) * gap
+            // 시작지점 설정
+            if let tempMax = self.futureData[0]?.tempMax {
+                let x = Float(0) * gap
                 let y = (1 - (Float(tempMax)! + 30) / 80) * Float(h)
+                prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
                 curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                context.addLines(between: [prev!, curr!])
-                prev = curr
             }
-        }
-        context.strokePath()
-        
-        // 습도
-        context.setLineWidth(1.0)
-        context.setStrokeColor(UIColor.black.cgColor)
+            
+            // 그리기
+            for i in 0 ... futureData.count-1 {
+                if let tempMax = self.futureData[i]?.tempMax {
+                    let x = Float(i) * gap
+                    let y = (1 - (Float(tempMax)! + 30) / 80) * Float(h)
+                    curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
+                    context.addLines(between: [prev!, curr!])
+                    prev = curr
+                }
+            }
+            context.strokePath()
+            
+            // 습도
+            context.setLineWidth(1.0)
+            context.setStrokeColor(UIColor.black.cgColor)
 
-        // 시작지점 설정
-        if let humidity = self.futureData[0]?.humidity {
-            let x = Float(0) * gap
-            let y = Float(h) - Float(humidity)! * Float(h) / 100
-            prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
-            curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
-        }
-        
-        // 그리기
-        for i in 0 ... futureData.count-1 {
-            if let humidity = self.futureData[i]?.humidity {
-                let x = Float(i) * gap
+            // 시작지점 설정
+            if let humidity = self.futureData[0]?.humidity {
+                let x = Float(0) * gap
                 let y = Float(h) - Float(humidity)! * Float(h) / 100
+                prev = CGPoint(x: CGFloat(x), y: CGFloat(y))
                 curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
-                context.addLines(between: [prev!, curr!])
-                prev = curr
             }
+            
+            // 그리기
+            for i in 0 ... futureData.count-1 {
+                if let humidity = self.futureData[i]?.humidity {
+                    let x = Float(i) * gap
+                    let y = Float(h) - Float(humidity)! * Float(h) / 100
+                    curr = CGPoint(x: CGFloat(x), y: CGFloat(y))
+                    context.addLines(between: [prev!, curr!])
+                    prev = curr
+                }
+            }
+            context.strokePath()
+            
+            imgChart.image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
         }
-        context.strokePath()
         
-        imgChart.image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
     }
 
     func getData(){

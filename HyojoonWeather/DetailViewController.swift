@@ -29,14 +29,16 @@ class DetailViewController: UIViewController {
         if let currentWeather = self.currentWeather {
             DispatchQueue.main.async {
                 self.lblName.text = currentWeather.cityName
-                self.lblTemp.text = currentWeather.temperature
-                self.lblFeelsLike.text = currentWeather.feelsLike
-                self.lblHumidity.text = currentWeather.humidity
-                self.lblTempMin.text = currentWeather.tempMin
-                self.lblTempMax.text = currentWeather.tempMax
-                self.lblPressure.text = currentWeather.pressure
-                self.lblWindSpeed.text = currentWeather.windSpeed
-                self.lblDescription.text = currentWeather.description
+                self.lblTemp.text = "\(currentWeather.temperature!) ºC"
+                self.lblFeelsLike.text = "\(currentWeather.feelsLike!) ºC"
+                self.lblHumidity.text = "\(currentWeather.humidity!) %"
+                self.lblTempMin.text = "\(currentWeather.tempMin!) ºC"
+                self.lblTempMax.text = "\(currentWeather.tempMax!) ºC"
+                self.lblPressure.text = "\(currentWeather.pressure!) hPa"
+                self.lblWindSpeed.text = "\(currentWeather.windSpeed!) m/s"
+                self.lblDescription.text = currentWeather.description!
+                print(currentWeather.feelsLike!)
+                print(currentWeather.tempMax!)
                 
                 do {
                     let url = URL(string: currentWeather.iconUrl!)
